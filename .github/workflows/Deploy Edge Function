@@ -1,0 +1,23 @@
+# .github/workflows/deploy-edge-function.yml
+name: Deploy Edge Function
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Supabase CLI
+        run: npm install -g supabase
+
+      - name: Link project & deploy
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          supabase link --project-ref your-project-ref
+          supabase functions deploy sync_flights
