@@ -9,6 +9,9 @@ jobs:
   sync:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code 
+        uses: actions/checkout@v2
+        
       - name: Call Supabase Edge Function
         run: |
           curl -X POST "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" \
