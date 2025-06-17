@@ -21,3 +21,10 @@ jobs:
         run: |
           supabase link --project-ref your-project-ref
           supabase functions deploy sync_flights
+      - name: Call Supabase Edge Function
+    run: |
+    $Headers = @{
+      Authorization = "Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+      "Content-Type" = "application/json"
+    }
+    Invoke-RestMethod -Uri "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" -Method Post -Headers $Headers
