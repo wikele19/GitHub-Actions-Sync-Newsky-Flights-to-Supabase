@@ -12,9 +12,11 @@ jobs:
       - name: Checkout code 
         uses: actions/checkout@v2
         
-      - name: Call Supabase Edge Function
-        run: |
-          curl -X POST "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" \
-          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
-          -H "Content-Type: application/json"
+     - name: Call Supabase Edge Function
+  run: |
+    $Headers = @{
+      Authorization = "Bearer ${{ secrets.SUPABASE_ANON_KEY }}"
+      "Content-Type" = "application/json"
+    }
+    Invoke-RestMethod -Uri "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" -Method Post -Headers $Headers
 
