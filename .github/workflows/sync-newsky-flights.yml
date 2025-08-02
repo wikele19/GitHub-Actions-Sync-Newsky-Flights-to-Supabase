@@ -1,0 +1,20 @@
+name: Sync Newsky Flights
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Every 5 minutes
+  workflow_dispatch: # Manual run option
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call Supabase Edge Function
+        run: |
+          curl -X POST "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" \
+          -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+                "sync_type": "ongoing",
+                "limit": 50
+              }'
