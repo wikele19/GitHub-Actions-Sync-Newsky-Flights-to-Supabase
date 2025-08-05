@@ -11,7 +11,7 @@ jobs:
     steps:
       - name: Call Supabase Edge Function
         run: |
-          curl -X POST "https://kqhcvhbdekcyiyorracs.supabase.co/functions/v1/sync-newsky-flights" \
+          curl -X POST "https://nxshuqbtfbywhrnxssgo.supabase.co/functions/v1/sync-newsky-flights" \
           -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
           -H "Content-Type: application/json" \
           -d '{
