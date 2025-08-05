@@ -1,0 +1,19 @@
+name: Sync Supabase Flights (Every 5 Minutes)
+
+on:
+  schedule:
+    - cron: '*/5 * * * *'  # every 5 minutes (UTC)
+  workflow_dispatch:        # allows manual runs
+
+jobs:
+  sync-flights:
+    name: Call Supabase Edge Function
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Sync latest 50 flights from Newsky
+        run: |
+          curl -X POST "https://nxshuqbtfbywhrnxssgo.supabase.co/functions/v1/sync-newsky-flights" \
+            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
+            -H "Content-Type: application/json" \
+            -d '{"limit": 50}'
