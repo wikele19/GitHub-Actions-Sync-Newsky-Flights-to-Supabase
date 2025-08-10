@@ -2,7 +2,7 @@ name: Sync Newsky Flights
 
 on:
   schedule:
-    - cron: '*/105 * * * *' # Every 105 minutes
+    - cron: '*/10 * * * *' # Every 10 minutes
   workflow_dispatch: # Manual run option
 
 jobs:
